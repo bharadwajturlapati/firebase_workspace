@@ -9,15 +9,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/firebase-element/firebase-auth.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
 <dom-module id="x-login">
   <template>
     <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="resplendent-fire-9817.firebaseio.com" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
 
-    Firebase location:
-    <input value="https://resplendent-fire-9817.firebaseio.com" size="40" disabled>
+    <!--Firebase location:
+    <input value="https://resplendent-fire-9817.firebaseio.com" size="40" disabled>-->
     <br>
 
-    Provider type:
+    Login Type:
     <select value="{{provider::change}}">
       <option>anonymous</option>
       <option>facebook</option>
@@ -26,7 +28,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <option>twitter</option>
       <option>password</option>
     </select>
-    <em>Only 'anonymous', 'google', and 'password' are activated for demo Firebase account</em>
+	
+	<button id = "google" type="button" class="btn btn-primary" provider= "google" value = "google" on-click= "login">anonymous</button>
+	<button id = "facebook" type="button" class="btn btn-primary" value = "{{provider::input}}" on-tap= "login()">facebook</button>
+	<button id = "github" type="button" class="btn btn-primary" value = "{{provider::input}}" on-tap= "login()">github</button>
+	<button id = "google" type="button" class="btn btn-primary" value = "{{provider::input}}" on-tap= "login()">google</button>
+	<button id = "twitter" type="button" class="btn btn-primary" value = "{{provider::input}}" on-tap= "login()">twitter</button>
+	<button id = "password" type="button" class="btn btn-primary" value = "{{provider::input}}" on-tap= "login()">password</button>
+	
+	<button on-tap="removeUserHandler" >Remove user</button>
+    <!--<em>Only 'anonymous', 'google', and 'password' are activated for demo Firebase account</em>-->
     <br>
 
     Login params (JSON):
@@ -92,12 +103,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       statusKnown: {
         type: Boolean
+      },
+	  google: {
+        type: String,
+		value: 'google'
+      },
+	  anonymous: {
+        type: String,
+		value: 'anonymous'
+      },
+	  twitter: {
+        type: String,
+		value: 'twitter'
+      },
+	  password: {
+        type: String,
+		value: 'password'
+      },
+	  github: {
+        type: String,
+		value: 'github'
       }
+	  
     },
 
-    login: function() {
+    login: function(id) {
       var params;
-
+	this.provider = id;
       try {
         params = JSON.parse(this.params);
       } catch (e) {
@@ -179,6 +211,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       return 'Unknown (checking status...)';
-    }
+    },
+	setProvider:function(id){
+		document.getElementById("firebaseLogin").setAttribute("provider",id);
+	}
   });
+ 
 </script>

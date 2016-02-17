@@ -1,0 +1,52 @@
+html, body {
+  height: 100%;
+  background-color:#f2f2f2;
+  margin: 0;
+}
+iron-label{
+	font-family:sans-serif;
+}
+.google-visualization-table-table th {
+    position: relative ;
+	z-index:0 !important;
+}
+#header{
+color:white;
+}
+paper-card{
+	margin-bottom:2px;
+	width:400px;
+}
+#map_css{
+	float:left;
+	margin-top:40px;
+	margin-left:20px;
+	padding:10px;
+	height: 300px;
+	width:400px;
+}
+#metrics{
+float:right;
+margin-top:40px;
+margin-right:20px;
+padding:10px;
+	height: 300px;
+	width: 400px;
+}
+
+#devices{
+float:left;
+margin-top:60px;
+margin-left:20px;
+padding:10px;
+height: 300px;
+width: 400px;
+}
+#alarm_history{
+float:right;
+margin-top:60px;
+margin-right:20px;
+padding:10px;
+	height: 300px;
+	width: 400px;
+}

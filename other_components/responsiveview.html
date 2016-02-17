@@ -1,0 +1,50 @@
+<link rel="import" href="../bower_components/firebase-element/firebase.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel= "import" href="../bower_components/google-chart/google-chart.html">
+<link rel= "import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel= "import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+<link rel= "import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel= "import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel= "import" href="../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel= "import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel= "import" href="../bower_components/iron-label/iron-label.html">
+<link rel= "import" href="../bower_components/paper-item/paper-item.html">
+<link rel= "import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link href="../bower_components/iron-list/iron-list.html" rel="import">
+<link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+
+<dom-module id="responsive-view">
+<style is="custom-style">
+          .flex-vertical {
+            @apply(--layout-vertical);
+			height:1000px;
+          }
+          .flexchild-vertical {
+            @apply(--layout-flex);
+          }
+		  .flex-equal-around-justified {
+			margin:10px;
+            @apply(--layout-horizontal);
+            @apply(--layout-around-justified);
+          }
+    </style>
+
+<template is="dom-bind">
+<iron-media-query query="{{query}}" query-matches="{{wide}}"></iron-media-query>
+<template is="dom-if" if="{{!wide}}">
+				
+			</template>
+</template>
+</dom-module>
+    <script>
+      Polymer({
+        is: 'responsive-view',
+		properties: {
+      query: {
+        type: String,
+        notify: true
+      }
+    }
+      });
+    </script>
+
