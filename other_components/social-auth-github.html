@@ -4,69 +4,25 @@ Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
 The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
+Code distributed by github as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/firebase-element/firebase-auth.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 
-<dom-module id="x-login">
-  <template>
-    <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="resplendent-fire-9817.firebaseio.com" provider="{{provider}}" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
-
-    <!--Firebase location:
-    <input value="https://resplendent-fire-9817.firebaseio.com" size="40" disabled>-->
-    <br>
-
-    Login Type:
-    <select value="{{provider::change}}">
-      <option>anonymous</option>
-      <option>facebook</option>
-      <option>github</option>
-      <option>google</option>
-      <option>twitter</option>
-      <option>password</option>
-    </select>
+<dom-module id="social-auth-github">
+  <template><!--
+    <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="resplendent-fire-9817.firebaseio.com" provider="github" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>-->
 	
-	<button on-tap="removeUserHandler" >Remove user</button>
-    <!--<em>Only 'anonymous', 'google', and 'password' are activated for demo Firebase account</em>-->
-    <br>
+    <button  class="btn btn-primary" on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">Connect with Github</button>
+    <!--<button on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}">Logout</button>-->
 
-    Login params (JSON):
-    <input value="{{params::input}}" id="params">
-    <em>Required by some provider types</em>
-    <br>
-
-    <div hidden$="{{computePasswordHidden(provider)}}">
-      <br><em>Password-specific options:</em><br>
-      <input placeholder="email" value="{{email::input}}">
-      <input placeholder="password" value="{{password::input}}">
-      <button on-tap="createUserHandler" disabled$="{{computeCreateUserDisabled(email, password)}}">Create user</button>
-      <br>
-      <input placeholder="new password" value="{{newPassword::input}}">
-      <button on-tap="changePasswordHandler" disabled$="{{computeChangePasswordDisabled(email, password, newPassword)}}">Change password</button>
-      <br>
-      <button on-tap="resetPasswordHandler" disabled$="{{computeResetPasswordDisabled(email, password)}}">Reset password</button>
-      <button on-tap="removeUserHandler" disabled$="{{computeRemoveUserDisabled(email, password)}}">Remove user</button>
-    </div>
-    <br>
-    <div id="message">[[message]]</div>
-    <br>
-
-    <button on-tap="login" hidden$="{{computeLoginHidden(statusKnown, user)}}">Login</button>
-    <button on-tap="logout" hidden$="{{computeLogoutHidden(statusKnown, user)}}">Logout</button>
-
-    <h3>Login status:</h3>
-    <p>{{computeLoginStatus(statusKnown, user)}}</p>
-
-    <h3>User ID:</h3>
-    <pre>{{user.uid}}</pre>
   </template>
 </dom-module>
 <script>
   Polymer({
-    is: 'x-login',
+    is: 'social-auth-github',
 
     properties: {
       provider: {
@@ -97,9 +53,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       statusKnown: {
         type: Boolean
       },
-	  google: {
+	  github: {
         type: String,
-		value: 'google'
+		value: 'github'
       },
 	  anonymous: {
         type: String,
@@ -118,23 +74,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		value: 'github'
       }
 	  
-    },
-
-    login: function() {
-      var params;
-      try {
-        params = JSON.parse(this.params);
-      } catch (e) {
-        params = null;
-      }
-
-      if (this.provider == 'password') {
-        params = params || {};
-        params.email = this.email;
-        params.password = this.password;
-      }
-
-      this.$.firebaseLogin.login(params);
     },
 
     logout: function() {
@@ -186,6 +125,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     computeLoginHidden: function(statusKnown, user) {
+		if(statusKnown&&user&&this.$.firebaseLogin.provider=="github"){
+			window.location.href="index.html"+"#"+user.github.displayName+"&"+user.uid;
+		}
       return !statusKnown || !!user;
     },
 
@@ -204,9 +146,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       return 'Unknown (checking status...)';
     },
-	setProvider:function(id){
-		document.getElementById("firebaseLogin").setAttribute("provider",id);
-	}
+	 login: function(statusKnown, user) {
+      var params;
+	  var firebasenode = document.getElementById("firebaseLogin");
+	  firebasenode.setAttribute("provider","github");
+      try {
+        params = JSON.parse(this.params);
+      } catch (e) {
+        params = null;
+      }
+
+      if (this.provider == 'password') {
+        params = params || {};
+        params.email = this.email;
+        params.password = this.password;
+      }
+		this.repl.auth.provider = this.user.provider;
+      this.$.firebaseLogin.login(params);
+    }
   });
  
 </script>

@@ -249,8 +249,10 @@ Element wrapper for the Firebase authentication API (https://www.firebase.com/do
      */
     logout: function() {
       if (navigator.onLine === false) {
+		console.log("Online is false");
         this.queuedLogout = true;
       } else {
+	  console.log("Online is true");
         this.ref.unauth();
       }
     },

@@ -22,15 +22,21 @@ smaller than 760
 }
 
 /* =================================================================================
-smaller than 428 
+smaller than 600
 ================================================================================= */
-@media screen and (max-width: 428px) {
-#metrics{
-	float:left;
-}
-#alarm_history{
-	float:left;
-}
+@media screen and (max-width: 600px) {
+
+	.right_card{
+		float:left;
+		margin: 60px 0px 0px 0px;
+		height: 300px;
+		width: 400px;
+	}
+	.left_card{
+		margin: 60px 0px 0px 0px;
+		height: 300px;
+		width: 400px;
+	}
 
 }
 

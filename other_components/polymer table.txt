@@ -1,0 +1,12 @@
+Table In polymer
+<div id="alarm_history">
+						<paper-card><div class="card-content">Alarm History</div></paper-card>
+						<google-chart
+						  type='table'
+						  options=''
+						  data='[
+						  ["Local Time","Device Id","Rule Output","Value"],
+						  ["Device1", "Device1","Device1","Device1"]
+						  ]'>
+						</google-chart>
+						</div>

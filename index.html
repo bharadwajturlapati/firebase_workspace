@@ -11,38 +11,52 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <title>Dashboard</title>
 <head>
+	<script>
+		var isloggedin = function(){ 
+			var isLoggedin = window.localStorage.getItem("firebase:session::resplendent-fire-9817");
+			if(isLoggedin==null){
+				window.location.href = "index_login.html"
+			}
+		}
+		isloggedin();
+	</script>
 	<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
 	<script src="css/bower_components/jquery/dist/jquery.min.js"></script>
-	<!--<script src="js/bootstrap.min.js"></script>
-	<script src="js/d3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!--<script src="js/d3.min.js"></script>
 	<script src="js/c3.min.js"></script>-->
 	<script src="js/app.js"></script>
-	<link rel="import" href="../bower_components/firebase-element/firebase.html">
-	<link rel="import" href="../bower_components/google-map/google-map.html">
-	<link rel= "import" href="../bower_components/google-chart/google-chart.html">
-	<link rel= "import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-	<link rel= "import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
-	<link rel= "import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-	<link rel= "import" href="../bower_components/paper-menu/paper-menu.html">
-	<link rel= "import" href="../bower_components/paper-header-panel/paper-header-panel.html">
-	<link rel= "import" href="../bower_components/paper-toolbar/paper-toolbar.html">
-	<link rel= "import" href="../bower_components/paper-card/paper-card.html">
-	<link rel= "import" href="../bower_components/iron-label/iron-label.html">
-	<link rel= "import" href="../bower_components/paper-item/paper-item.html">
-	<link rel= "import" href="../bower_components/iron-media-query/iron-media-query.html">
-	<link href="../bower_components/iron-list/iron-list.html" rel="import">
-	<link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+	<link rel="import" href="bower_components/firebase-element/firebase.html">
+	<link rel="import" href="bower_components/google-map/google-map.html">
+	<link rel= "import" href="bower_components/google-chart/google-chart.html">
+	<!--<link rel= "import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">-->
+	<link rel= "import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+	<link rel= "import" href="bower_components/paper-icon-button/paper-icon-button.html">
+	<link rel= "import" href="bower_components/paper-menu/paper-menu.html">
+	<link rel= "import" href="bower_components/paper-header-panel/paper-header-panel.html">
+	<link rel= "import" href="bower_components/paper-toolbar/paper-toolbar.html">
+	<link rel= "import" href="bower_components/paper-card/paper-card.html">
+	<link rel= "import" href="bower_components/iron-label/iron-label.html">
+	<link rel= "import" href="bower_components/paper-item/paper-item.html">
+	<link rel= "import" href="bower_components/iron-media-query/iron-media-query.html">
+	<link href="bower_components/iron-list/iron-list.html" rel="import">
+	<link href="bower_components/iron-icons/iron-icons.html" rel="import">
 	<link rel="import" href="other_components/getDevices.html">
+	<link rel="import" href="other_components/auth-logout.html">
+	
 	
 	<!-- Add the custom componenets here -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="css/root.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
-<body>
+<body onload="getusername()">
+	<div id = "isLoggedin"></div>
 	<paper-drawer-panel id="paperDrawerPanel">
       <paper-header-panel drawer>
-		<paper-toolbar class="tall">
+		<paper-toolbar class="tall" id="sidetoolbar">
+			<div id = "user_name">User</div>
 			<paper-icon-button icon="account-circle"></paper-icon-button>
 		</paper-toolbar>
 		<paper-menu>
@@ -58,23 +72,22 @@
 	  </paper-header-panel>
       <paper-header-panel main>
 		<div>
-			<paper-header-panel>
-				<paper-toolbar id= "header">
+			<paper-header-panel class="main_header">
+				<paper-toolbar id= "header" class="medium-tall">
 				<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
 				<div class="title">REPL</div>
 				<paper-icon-button icon="refresh"></paper-icon-button>
-				<paper-icon-button icon="more-vert"></paper-icon-button>
+				<auth-logout></auth-logout>
 				</paper-toolbar>
 			</paper-header-panel>
 			<div class = "flex flex-vertical">
 					<!-- start of Row1 -->
 					<div class="flex-equal-around-justified">
-						<div id="map_css">
-							<paper-card><div class="card-content">Map</div></paper-card>
-							<google-map id="map_loc" latitude="37.77493" longitude="-122.41942"></google-map>
+						<div class="left_card">
+						<paper-card><div class="card-content">Device to View</div></paper-card>
+							<device-view></device-view>
 						</div>
-					
-						<div id="metrics">
+						<div class="right_card">
 						<paper-card><div class="card-content">Metrics</div></paper-card>
 						  <google-chart 
 										id="line_chart" 
@@ -88,24 +101,119 @@
 					<!-- End of Row1 -->
 					<!-- Start of Row2 -->
 					<div class="flex-equal-around-justified">
-						
-						<div id = "devices">
-						<paper-card><div class="card-content">Device to View</div></paper-card>
-							<device-view></device-view>
+						<div class="left_card">
+							<paper-card><div class="card-content">Map</div></paper-card>
+							<google-map id="map_loc" latitude="37.77493" longitude="-122.41942"></google-map>
 						</div>
-						<div id="alarm_history">
-						<paper-card><div class="card-content">Alarm History</div></paper-card>
-						<google-chart
-						  type='table'
-						  options=''
-						  data='[
-						  ["Local Time","Device Id","Rule Output","Value"],
-						  ["Device1", "Device1","Device1","Device1"]
-						  ]'>
-						</google-chart>
+						
+						<div class="right_card">
+						<paper-card><div class="card-content">Metrics</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
 						</div>
 					</div>
 					<!-- End of Row2 -->
+					<!-- Start of Row3 -->
+					<div class="flex-equal-around-justified">
+						<div class="left_card">
+						<paper-card><div class="card-content">Voltage</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+						<div class="right_card">
+						<paper-card><div class="card-content">Current</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+					</div>
+					<!-- End of Row3 -->
+					<!-- Start of Row4 -->
+					<div class="flex-equal-around-justified">
+						<div class="left_card">
+						<paper-card><div class="card-content">Power Factor</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+						<div class="right_card">
+						<paper-card><div class="card-content">Active Power</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+					</div>
+					<!-- End of Row4 -->
+					<!-- Start of Row5 -->
+					<div class="flex-equal-around-justified">
+						<div class="left_card">
+						<paper-card><div class="card-content">Reactive Power</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+						<div class="right_card">
+						<paper-card><div class="card-content">Active Energy</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+					</div>
+					<!-- End of Row5 -->
+					<!-- Start of Row6 -->
+					<div class="flex-equal-around-justified">
+						<div class="left_card">
+						<paper-card><div class="card-content">Reactive Energy</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+						<div class="right_card">
+						<paper-card><div class="card-content">Total Harmonic Distortion</div></paper-card>
+						  <google-chart 
+										id="line_chart" 
+										type='line' 
+										options='{"title": "Days in a month"}' 
+										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
+										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
+							</google-chart>
+						</div>
+					</div>
+					<!-- End of Row6 -->
 			</div>
 		</div>
 		</paper-header-panel>
