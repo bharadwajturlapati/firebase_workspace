@@ -71,7 +71,7 @@ var loginup = function(){
 		}
 		else{
 			console.log("Authenticated successfully with payload:", authData);
-			window.location.href = "index.htm"+"#"+email+"&"+authData.uid;
+			window.location.href = "index.html"+"#"+email+"&"+authData.uid;
 		}
 	});
 	
