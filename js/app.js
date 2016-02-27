@@ -2,6 +2,9 @@
 *Self executing Functions 
 */
 var db_name = "https://resplendent-fire-9817.firebaseio.com/users";
+var data_db = "https://repldb.firebaseio.com/";
+var device_name = "dev1";
+
 
 
 var setUsername = function(username){
@@ -20,10 +23,38 @@ var getusername = function(){
 		setUsername(username);
 		return username;
 	}
-	setUsername(username),1000;
+	setUsername(username);
+	loaddata();
+	loaddatavoltage();
 	return username;
 };
 
+var loaddata = function(){
+	var dbref = new Firebase(data_db+device_name);
+	var rows = [];
+	dbref.limitToLast(1000).on("value", function(snapshot) {
+		var i=0;
+		snapshot.forEach(function(data) {
+			var interm_row = [data.val().time_stamp,data.val().current];
+			rows.push(interm_row);
+			i++;
+		});
+		document.getElementById("line_chart_current").setAttribute("rows",JSON.stringify(rows));
+	});
+}
+var loaddatavoltage = function(){
+	var dbref = new Firebase(data_db+device_name);
+	var rows = [];
+	dbref.limitToLast(1000).on("value", function(snapshot) {
+		var i=0;
+		snapshot.forEach(function(data) {
+			var interm_row = [data.val().time_stamp,data.val().voltage];
+			rows.push(interm_row);
+			i++;
+		});
+		document.getElementById("line_chart_voltage").setAttribute("rows",JSON.stringify(rows));
+	});
+}
 var signup = function(){
 	var new_user = new Firebase(db_name);
 	new_user.once("value",function(snapshot){
