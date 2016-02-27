@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="A front-end template for micrograce">
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <title>Dashboard</title>
+    <title>STAR</title>
 <head>
 	<script>
 		var isloggedin = function(){ 
@@ -55,14 +55,15 @@
 	<div id = "isLoggedin"></div>
 	<paper-drawer-panel id="paperDrawerPanel">
       <paper-header-panel drawer>
-		<paper-toolbar class="tall" id="sidetoolbar">
-			<paper-icon-button icon="account-circle"></paper-icon-button>
+		<paper-toolbar class="medium-tall" id="sidetoolbar">
+			<div class="title" id = "replHeader">REPL</div>
+			<div class="middle" id = "starHeader">Smart Termination Application</div>
 		</paper-toolbar>
 		<paper-menu>
-			<paper-item>STAR Grid Overview</paper-item>
-			<paper-item>STAR Details</paper-item>
-			<paper-item>STAR Admin</paper-item>
-			<paper-item>STAR Database</paper-item>
+			<paper-item>Grid Overview</paper-item>
+			<paper-item>Details</paper-item>
+			<paper-item>Admin</paper-item>
+			<paper-item>Database</paper-item>
 		</paper-menu>
 	  </paper-header-panel>
       <paper-header-panel main>
@@ -70,26 +71,29 @@
 			<paper-header-panel class="main_header">
 				<paper-toolbar id= "header">
 				<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-				<div class="title">Smart Termination Application</div><div class="title" id = "replHeader">REPL</div>
+				<div class="title" id="star_topbar">STAR</div>
 				<div id = "user_name">User</div>
 				<paper-icon-button icon="refresh"></paper-icon-button>
 				<auth-logout></auth-logout>
 				</paper-toolbar>
 			</paper-header-panel>
 			<div class = "repl_tabview">
+					<!-- Header row-->
+					<div class = "repl_row">
+						<div id="device_to_view">Device to View: <device-view></device-view></div>
+					</div>
 					<!-- start of Row1 -->
 					<div class="repl_row">
 						<div class="left_card">
-							<paper-card><div class="card-content">Map</div></paper-card>
+							<!--<paper-card><div class="card-content">Map</div></paper-card>-->
 							<google-map id="map_loc" latitude="37.77493" longitude="-122.41942"></google-map>
 						</div>
 						<div class="right_card">
-						Device to View: <device-view></device-view>
-						<paper-card><div class="card-content">Metrics</div></paper-card>
+						<!--<paper-card><div class="card-content">Metrics</div></paper-card>-->
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Days in a month","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -99,21 +103,21 @@
 					<!-- Start of Row2 -->
 					<div class="repl_row">
 						<div class="left_card">
-						<paper-card><div class="card-content">Voltage</div></paper-card>
+						<!--<paper-card><div class="card-content">Voltage</div></paper-card>-->
 						  <google-chart 
 										id="line_chart_voltage" 
 										type='line' 
-										options='{"title": "Voltage-Time","curveType": "function"}' 
+										options='{"title": "Voltage","curveType": "function"}' 
 										cols='[{"label": "Time", "type": "number"},{"label": "Voltage", "type": "number"}]' 
 										rows='[[0.18996,169.19],[0.18998,167.68],[0.19,174.19],[0.19002,172.16],[0.19004,175.39]]'>
 							</google-chart>
 						</div>
 						<div class="right_card">
-						<paper-card><div class="card-content">Current</div></paper-card>
+						<!--<paper-card><div class="card-content">Current</div></paper-card>-->
 						  <google-chart 
 										id="line_chart_current" 
 										type='line' 
-										options='{"title": "Current-Time","curveType": "function"}' 
+										options='{"title": "Current","curveType": "function"}' 
 										cols='[{"label": "Time", "type": "number"},{"label": "Current", "type": "number"}]' 
 										rows='[[0.18996,169.19],[0.18998,167.68],[0.19,174.19],[0.19002,172.16],[0.19004,175.39]]'>
 							</google-chart>
@@ -123,21 +127,21 @@
 					<!-- Start of Row3 -->
 					<div class="repl_row">
 						<div class="left_card">
-						<paper-card><div class="card-content">Power Factor</div></paper-card>
+						<!--<paper-card><div class="card-content">Power Factor</div></paper-card>-->
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Days in a month","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
 						</div>
 						<div class="right_card">
-						<paper-card><div class="card-content">Active Power</div></paper-card>
+						<!--<paper-card><div class="card-content">Active Power</div></paper-card>-->
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Days in a month","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -147,21 +151,21 @@
 					<!-- Start of Row4 -->
 					<div class="repl_row">
 						<div class="left_card">
-						<paper-card><div class="card-content">Reactive Power</div></paper-card>
+						<!--<paper-card><div class="card-content">Reactive Power</div></paper-card>-->
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Days in a month","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
 						</div>
 						<div class="right_card">
-						<paper-card><div class="card-content">Active Energy</div></paper-card>
+						<!--<paper-card><div class="card-content">Active Energy</div></paper-card>-->
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Days in a month","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -171,21 +175,21 @@
 					<!-- Start of Row5 -->
 					<div class="repl_row">
 						<div class="left_card">
-						<paper-card><div class="card-content">Reactive Energy</div></paper-card>
+						<!--<paper-card><div class="card-content">Reactive Energy</div></paper-card>-->
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Days in a month","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
 						</div>
 						<div class="right_card">
-						<paper-card><div class="card-content">Total Harmonic Distortion</div></paper-card>
+						<!--<paper-card><div class="card-content">Total Harmonic Distortion</div></paper-card>-->
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Days in a month","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>

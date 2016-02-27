@@ -41,6 +41,8 @@ var loaddata = function(){
 		});
 		document.getElementById("line_chart_current").setAttribute("rows",JSON.stringify(rows));
 	});
+	dbref.on('child_added', function(childSnapshot, prevChildKey) {
+	});
 }
 var loaddatavoltage = function(){
 	var dbref = new Firebase(data_db+device_name);
@@ -54,6 +56,9 @@ var loaddatavoltage = function(){
 		});
 		document.getElementById("line_chart_voltage").setAttribute("rows",JSON.stringify(rows));
 	});
+	dbref.on('child_added', function(childSnapshot, prevChildKey) {
+		
+	})
 }
 var signup = function(){
 	var new_user = new Firebase(db_name);

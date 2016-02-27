@@ -40,11 +40,30 @@ paper-card{
 
 #replHeader{
 	color:#e60000;
+	font-family:roboto;
 	font-size:40px;
+	font-style:italic;
+	font-weight: 600;
+}
+#starHeader{
+	color:#3f51b5;
+	font-family:roboto;
+	font-size:18px;
+}
+#star_topbar{
+font-family:roboto;
+	font-weight: 600;
+}
+
+#device_to_view{
+	    text-align: center;
+    font-family: roboto;
+    font-size: 18px;
 }
 
 #sidetoolbar{
 	color:white;
+	background-color: white;
 	font-family:roboto;
 }
 .btn-logout{
