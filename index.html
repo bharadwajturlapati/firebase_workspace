@@ -53,7 +53,7 @@
 </head>
 <body onload="getusername()">
 	<div id = "isLoggedin"></div>
-	<paper-drawer-panel id="paperDrawerPanel">
+	<!--<paper-drawer-panel id="paperDrawerPanel">
       <paper-header-panel drawer>
 		<paper-toolbar class="medium-tall" id="sidetoolbar">
 			<div class="title" id = "replHeader">REPL</div>
@@ -65,18 +65,18 @@
 			<paper-item>Admin</paper-item>
 			<paper-item>Database</paper-item>
 		</paper-menu>
-	  </paper-header-panel>
-      <paper-header-panel main>
-		<div>
-			<paper-header-panel class="main_header">
+	  </paper-header-panel>-->
+     <!-- <paper-header-panel main>-->
+		<div id="paperDrawerPanelnew">
+			<!--<paper-header-panel class="main_header">-->
 				<paper-toolbar id= "header">
-				<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-				<div class="title" id="star_topbar">STAR</div>
+				<!--<paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>-->
+				<div class="title" id="star_topbar">Smart Termination Application</div>
 				<div id = "user_name">User</div>
 				<paper-icon-button icon="refresh"></paper-icon-button>
 				<auth-logout></auth-logout>
 				</paper-toolbar>
-			</paper-header-panel>
+			<!--</paper-header-panel>-->
 			<div class = "repl_tabview">
 					<!-- Header row-->
 					<div class = "repl_row">
@@ -84,19 +84,9 @@
 					</div>
 					<!-- start of Row1 -->
 					<div class="repl_row">
-						<div class="left_card">
+						<div class="full_row">
 							<!--<paper-card><div class="card-content">Map</div></paper-card>-->
 							<google-map id="map_loc" latitude="37.77493" longitude="-122.41942"></google-map>
-						</div>
-						<div class="right_card">
-						<!--<paper-card><div class="card-content">Metrics</div></paper-card>-->
-						  <google-chart 
-										id="line_chart" 
-										type='line' 
-										options='{"title": "Metrics","curveType": "function"}' 
-										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
-										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
-							</google-chart>
 						</div>
 					</div>
 					<!-- End of Row1 -->
@@ -107,7 +97,7 @@
 						  <google-chart 
 										id="line_chart_voltage" 
 										type='line' 
-										options='{"title": "Voltage","curveType": "function"}' 
+										options='{"title": "Voltage","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Time", "type": "number"},{"label": "Voltage", "type": "number"}]' 
 										rows='[[0.18996,169.19],[0.18998,167.68],[0.19,174.19],[0.19002,172.16],[0.19004,175.39]]'>
 							</google-chart>
@@ -117,7 +107,7 @@
 						  <google-chart 
 										id="line_chart_current" 
 										type='line' 
-										options='{"title": "Current","curveType": "function"}' 
+										options='{"title": "Current","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Time", "type": "number"},{"label": "Current", "type": "number"}]' 
 										rows='[[0.18996,169.19],[0.18998,167.68],[0.19,174.19],[0.19002,172.16],[0.19004,175.39]]'>
 							</google-chart>
@@ -131,7 +121,7 @@
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Metrics","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -141,7 +131,7 @@
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Metrics","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -155,7 +145,7 @@
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Metrics","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -165,7 +155,7 @@
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Metrics","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -179,7 +169,7 @@
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Metrics","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -189,7 +179,7 @@
 						  <google-chart 
 										id="line_chart" 
 										type='line' 
-										options='{"title": "Metrics","curveType": "function"}' 
+										options='{"title": "Metrics","curveType": "function","legend": "none"}' 
 										cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"},{"label": "Days2", "type": "number"}]' 
 										rows='[["Jan", 31,32],["Feb", 28,33],["Mar", 31,34],["Apr", 30,35],["May", 31,28],["Jun", 22,24]]'>
 							</google-chart>
@@ -198,7 +188,7 @@
 					<!-- End of Row5 -->
 			</div>
 		</div>
-		</paper-header-panel>
-    </paper-drawer-panel>
+		<!--</paper-header-panel>-->
+    <!--</paper-drawer-panel>-->
 </body> 
 </html>
