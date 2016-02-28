@@ -10,6 +10,7 @@ var device_name = "dev1";
 var setUsername = function(username){
 	document.getElementById('user_name').innerHTML = username;
 }
+
 var getusername = function(){
 	var location_temp = window.location.hash;
 	var username = "";

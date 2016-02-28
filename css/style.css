@@ -6,6 +6,9 @@ html, body {
 iron-label{
 	font-family:sans-serif;
 }
+text[text-anchor="start"]{
+	font-size:16px;
+}
 .google-visualization-table-table th {
     position: relative ;
 	z-index:0 !important;
@@ -96,6 +99,7 @@ font-family:roboto;
 	background-color:#3f51b5;
 	border-color:#3f51b5;
 }
+
 
 .left_card{
 display:table-cell;
