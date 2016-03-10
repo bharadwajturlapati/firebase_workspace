@@ -28,6 +28,11 @@ var getusername = function(){
 	return username;
 };
 
+var logout = function(){
+	var debref = new Firebase(db_name);
+	debref.unauth();
+	window.location.href = "index_login.html"
+}
 var signup = function(){
 	var new_user = new Firebase(db_name);
 	new_user.once("value",function(snapshot){
