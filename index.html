@@ -35,6 +35,8 @@
 		}
 
 	</style>
+	<script src="js/app.js"></script>
+	<link rel="import" href="other_components/auth-logout.html">
 	<script>
 		var isloggedin = function(){ 
 			var isLoggedin = window.localStorage.getItem("firebase:session::resplendent-fire-9817");
@@ -47,10 +49,12 @@
 </head>
 <body>
 	<div class='topbar'>
-			<img src='img/logo.jpg' class='iconDetails'>
-			<h3>Smart Termination Grid<div id="user"></div></h3>
+			<img src='img/logo.jpg' class='iconDetails'></img>
+			<h3>Smart Termination Grid</h3>
+			<div class = "user" id="user_name"></div>
+			<auth-logout></auth-logout>
 	</div>
-
+	<script>getusername()</script>
 	<div id="map"></div>
 	<script>
 		var map;

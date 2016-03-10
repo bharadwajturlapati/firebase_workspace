@@ -1,0 +1,86 @@
+<!doctype html>
+
+<!--
+  Material Design for Micrograce
+-->
+
+<html lang="en">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template for micrograce">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>STAR-REPL</title>
+<head>
+	<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+	<script src="css/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/app.js"></script>
+	<link rel="import" href="bower_components/firebase-element/firebase.html">
+	<link rel="import" href="other_components/x-login.html">
+	<link rel="import" href="other_components/social-auth-google.html">
+	<link rel="import" href="other_components/social-auth-facebook.html">
+	<link rel="import" href="other_components/social-auth-github.html">
+	<link rel="import" href="other_components/all-oauth.html">
+	<link rel= "import" href="bower_components/paper-card/paper-card.html">
+	<link rel= "import" href="bower_components/paper-input/paper-input.html">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+		body{
+			font:roboto;
+		}
+		#logindiv_form{
+		}
+		#signupdiv_form{
+		}
+		paper-card{
+			width:500px;
+			height:400px;
+			margin: 60px 60px 20px 20px;
+		}
+		.right_card{
+			position:absolute;
+			right:10%;
+		}
+		.left_card{
+			left:10%;
+		}
+    </style>
+</head>
+<body>
+	<paper-card class="left_card">
+		<div class="card-content" id="logindiv_form">
+			<label>Have an Account?</label>
+			<div id="hiddenlabellogin"></div>
+			<form id = "login_form" onsubmit="return loginup()" role="form">
+			  <div>
+				  <paper-input id="l_username" required="true" label="username"></paper-input>
+				  <paper-input id="l_password" required="true" type="password" label="password"></paper-input>
+				</div>
+				<button class="btn btn-normal">Login</button>
+			</form>
+			<div id="login_page">
+				<!--<firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="resplendent-fire-9817.firebaseio.com" provider="facebook" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
+				<social-auth-google></social-auth-google>
+				<social-auth-facebook></social-auth-facebook>
+				<social-auth-github></social-auth-github>-->
+				<!--<all-oauth></all-oauth>-->
+			</div>
+		</div>
+	</paper-card>
+	<paper-card class="right_card">
+		<div class="card-content" id = "signupdiv_form">
+		<label>New User? Get Connected</label>
+		<div id="hiddenlabel"></div>
+		<form id = "signup_form" onsubmit="return signup()" role="form">
+			  <div>
+				  <paper-input id="s_username" required="true" label="username"></paper-input>
+				  <paper-input id="s_password" required="true" type="password" label="password"></paper-input>
+				  <button id="sign_up" class="btn btn-normal">Sign Up</button>
+				</div>
+			</form>
+		</div>
+	</paper-card>
+</body> 
+</html>

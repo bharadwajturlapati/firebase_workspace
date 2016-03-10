@@ -1,86 +1,42 @@
-<!doctype html>
-
-<!--
-  Material Design for Micrograce
--->
-
-<html lang="en">
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template for micrograce">
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>STAR-REPL</title>
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-	<script src="css/bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/app.js"></script>
-	<link rel="import" href="bower_components/firebase-element/firebase.html">
-	<link rel="import" href="other_components/x-login.html">
-	<link rel="import" href="other_components/social-auth-google.html">
-	<link rel="import" href="other_components/social-auth-facebook.html">
-	<link rel="import" href="other_components/social-auth-github.html">
-	<link rel="import" href="other_components/all-oauth.html">
-	<link rel= "import" href="bower_components/paper-card/paper-card.html">
-	<link rel= "import" href="bower_components/paper-input/paper-input.html">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-		body{
-			font:roboto;
-		}
-		#logindiv_form{
-		}
-		#signupdiv_form{
-		}
-		paper-card{
-			width:500px;
-			height:400px;
-			margin: 60px 60px 20px 20px;
-		}
-		.right_card{
-			position:absolute;
-			right:10%;
-		}
-		.left_card{
-			left:10%;
-		}
-    </style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>REPL Smart Termination Application</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="bower_components/firebase/firebase.js"></script>
+  <script src="js/app.js"></script>
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <link rel="icon" type="image/png" href="img/fav32.png">
 </head>
 <body>
-	<paper-card class="left_card">
-		<div class="card-content" id="logindiv_form">
-			<label>Have an Account?</label>
-			<div id="hiddenlabellogin"></div>
-			<form id = "login_form" onsubmit="return loginup()" role="form">
-			  <div>
-				  <paper-input id="l_username" required="true" label="username"></paper-input>
-				  <paper-input id="l_password" required="true" type="password" label="password"></paper-input>
-				</div>
-				<button class="btn btn-normal">Login</button>
-			</form>
-			<div id="login_page">
-				<!--<firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="resplendent-fire-9817.firebaseio.com" provider="facebook" on-error="errorHandler" on-user-created="userSuccessHandler" on-password-changed="userSuccessHandler" on-password-reset="userSuccessHandler" on-user-removed="userSuccessHandler"></firebase-auth>
-				<social-auth-google></social-auth-google>
-				<social-auth-facebook></social-auth-facebook>
-				<social-auth-github></social-auth-github>-->
-				<!--<all-oauth></all-oauth>-->
-			</div>
-		</div>
-	</paper-card>
-	<paper-card class="right_card">
-		<div class="card-content" id = "signupdiv_form">
-		<label>New User? Get Connected</label>
-		<div id="hiddenlabel"></div>
-		<form id = "signup_form" onsubmit="return signup()" role="form">
-			  <div>
-				  <paper-input id="s_username" required="true" label="username"></paper-input>
-				  <paper-input id="s_password" required="true" type="password" label="password"></paper-input>
-				  <button id="sign_up" class="btn btn-normal">Sign Up</button>
-				</div>
-			</form>
-		</div>
-	</paper-card>
-</body> 
+  <section class="container">
+    <img style="margin:0px auto;display:block" src="img/logo.jpg" alt="REPL STAR">
+    <br>
+    <div class="login">
+      <h1>Login to STAR</h1>
+      <form onsubmit="return loginup()">
+        <p><input type="text" id="l_username" name="login" value="" placeholder="Username or Email"></p>
+        <p><input type="password" id="l_password" name="password" value="" placeholder="Password"></p>
+        <p class="remember_me">
+          <label>
+            <input type="checkbox" name="remember_me" id="remember_me">
+            Remember me on this computer
+          </label>
+        </p>
+        <p class="submit"><input type="submit" name="commit" value="Login"></p>
+      </form>
+    </div>
+
+<!--     <div class="login-help">
+      <p>Forgot your password? <a href="index.html">Click here to reset it</a>.</p>
+    </div> -->
+  </section>
+
+</body>
 </html>

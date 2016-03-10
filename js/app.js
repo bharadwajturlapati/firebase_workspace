@@ -24,7 +24,7 @@ var getusername = function(){
 		setUsername(username);
 		return username;
 	}
-	//setUsername(username);
+	setUsername(username);
 	return username;
 };
 
