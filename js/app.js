@@ -24,43 +24,10 @@ var getusername = function(){
 		setUsername(username);
 		return username;
 	}
-	setUsername(username);
-	loaddata();
-	loaddatavoltage();
+	//setUsername(username);
 	return username;
 };
 
-var loaddata = function(){
-	var dbref = new Firebase(data_db+device_name);
-	var rows = [];
-	dbref.limitToLast(1000).on("value", function(snapshot) {
-		var i=0;
-		snapshot.forEach(function(data) {
-			var interm_row = [data.val().time_stamp,data.val().current];
-			rows.push(interm_row);
-			i++;
-		});
-		document.getElementById("line_chart_current").setAttribute("rows",JSON.stringify(rows));
-	});
-	dbref.on('child_added', function(childSnapshot, prevChildKey) {
-	});
-}
-var loaddatavoltage = function(){
-	var dbref = new Firebase(data_db+device_name);
-	var rows = [];
-	dbref.limitToLast(1000).on("value", function(snapshot) {
-		var i=0;
-		snapshot.forEach(function(data) {
-			var interm_row = [data.val().time_stamp,data.val().voltage];
-			rows.push(interm_row);
-			i++;
-		});
-		document.getElementById("line_chart_voltage").setAttribute("rows",JSON.stringify(rows));
-	});
-	dbref.on('child_added', function(childSnapshot, prevChildKey) {
-		
-	})
-}
 var signup = function(){
 	var new_user = new Firebase(db_name);
 	new_user.once("value",function(snapshot){
@@ -114,3 +81,4 @@ var loginup = function(){
 	
 	return false;
 }
+
