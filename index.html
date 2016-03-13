@@ -26,14 +26,31 @@
 
 		.topbar {
 			width:100%;
+			padding-left: 1%;
+			padding-top: 1%;
 			height:auto;
-			padding:1%;
 		}
 
-		h3 {
-			text-align:center;
-			margin:11px;
+		.leftcard{
+			margin:0px;
+			float:left;
+			display: inline-block;
 		}
+		.centercard{
+			position:relative;
+			margin:0px;
+			text-align:center;
+			left:30%;
+			display: inline-block;
+		}
+		.rightcard{
+		position:relative;
+			margin:0px;
+			float:right;
+			right:2%;
+			display: inline-block;
+		}
+		
 
 	</style>
 	<script src="js/app.js"></script>
@@ -47,18 +64,23 @@
 		isloggedin();
 	</script>
 </head>
-<body>
+<body onload="loadDevices()">
 	<div class='topbar'>
+		<div class="leftcard">
 			<img src='img/logo.jpg' class='iconDetails'></img>
+		</div>
+		<div class="centercard">
 			<h3>Smart Termination Grid</h3>
+		</div>
+		<div class="rightcard">
 			<div class = "user" id="user_name"></div>
 			<button id="logout" onclick="logout()">Logout</button>
+		</div>
 	</div>
 	<script>getusername()</script>
 	<div id="map"></div>
 	<script>
 		var map;
-
 		function initMap() {
 			var rst1LatLng = {lat: 40.024361, lng: 15.774875};
 			var rst2LatLng = {lat: 40.4, lng: 16.45};
@@ -69,43 +91,6 @@
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				disableDefaultUI: true
 			});
-			var rst1marker = new google.maps.Marker({
-				position: rst1LatLng,
-				map: map,
-				animation: google.maps.Animation.DROP,
-				title: 'R',
-				label: 'R'
-			});
-			var rst2marker = new google.maps.Marker({
-				position: rst2LatLng,
-				map: map,
-				animation: google.maps.Animation.DROP,
-				title: 'S',
-				label: 'S'
-			});
-			var rst3marker = new google.maps.Marker({
-				position: rst3LatLng,
-				map: map,
-				animation: google.maps.Animation.DROP,
-				title: 'T',
-				label: 'T'
-			});
-			rst1marker.addListener('click', function() {
-				window.open("http://metrics.replstar.com/dashboard/db/star");
-			});
-			rst2marker.addListener('click', function() {
-				window.open("http://metrics.replstar.com/dashboard/db/star");
-			});
-			rst3marker.addListener('click', function() {
-				window.open("http://metrics.replstar.com/dashboard/db/star");
-			});
-		}
-		function drop() {
-			for (var i =0; i < markerArray.length; i++) {
-				setTimeout(function() {
-					addMarkerMethod();
-				}, i * 200);
-			}
 		}
 	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoyftJ-6dpSFHmjJ5DSEkoCevnxafXazM&callback=initMap"

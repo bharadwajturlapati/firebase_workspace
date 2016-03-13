@@ -1,9 +1,13 @@
 /*
 *Self executing Functions 
 */
+/*
+Event listeners
+*/
+
 var db_name = "https://resplendent-fire-9817.firebaseio.com/users";
 var data_db = "https://repldb.firebaseio.com/";
-var device_name = "dev1";
+var db_devices = "https://repldevices.firebaseio.com/";
 
 
 
@@ -86,4 +90,34 @@ var loginup = function(){
 	
 	return false;
 }
+
+var loadDevices = function(){
+var dbSnapshot = new Firebase(db_devices);
+var json_mobj = {};
+	dbSnapshot.on("value", function(snapshot) {
+	  json_mobj = snapshot.val();
+	  for (var i in json_mobj){
+		loadMarkers(json_mobj[i]);
+		}
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
+	});
+	
+}
+
+var loadMarkers = function(markerObj){
+	console.log("Marking");
+	
+	var marker = new google.maps.Marker({
+				position: {lat: markerObj.lat, lng: markerObj.lng},
+				map: map,
+				animation: google.maps.Animation.DROP,
+				title: markerObj.name,
+				label: markerObj.lbl
+	});
+	marker.addListener('click', function() {
+				window.open("http://metrics.replstar.com/dashboard/db/star");
+	});
+}
+
 
