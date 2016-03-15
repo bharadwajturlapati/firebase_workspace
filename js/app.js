@@ -19,14 +19,21 @@ var login_graf =  function(username){
 	$.get("http://metrics.replstar.com/",function(data){
 		console.log("Auth proxy initiated")
 	});
+	$.ajax({
+         url: "http://metrics.replstar.com/",
+         type: "GET",
+         beforeSend: function(xhr){xhr.setRequestHeader('X-WEBAUTH-USER',username);},
+         success: function() { console.log("Success if configured at server side"); }
+      });
 }
 
 var getusername = function(){
 	var location_temp = window.location.hash;
 	var username = "";
 	try{
-		username = location_temp.split("&")[0];
-		username = username.slice(1,username.length);
+		//username = location_temp.split("&")[0];
+		//username = username.slice(1,username.length);
+		username = localStorage.getItem("firebase_user");
 	}
 	catch(err){
 		console.log(err);
@@ -42,6 +49,7 @@ var getusername = function(){
 var logout = function(){
 	var debref = new Firebase(db_name);
 	debref.unauth();
+	localStorage.removeItem("firebase_user");
 	window.location.href = "index_login.html"
 }
 var signup = function(){
@@ -91,7 +99,9 @@ var loginup = function(){
 		}
 		else{
 			console.log("Authenticated successfully with payload:", authData);
-			window.location.href = "index.html"+"#"+email+"&"+authData.uid;
+			//window.location.href = "index.html"+"#"+email+"&"+authData.uid;
+			localStorage.setItem("firebase_user", email);
+			window.location.href = "index.html";
 		}
 	});
 	
