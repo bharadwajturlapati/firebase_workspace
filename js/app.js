@@ -15,6 +15,12 @@ var setUsername = function(username){
 	document.getElementById('user_name').innerHTML = username;
 }
 
+var login_graf =  function(username){
+	$.get("http://metrics.replstar.com/",function(data){
+		console.log("Auth proxy initiated")
+	});
+}
+
 var getusername = function(){
 	var location_temp = window.location.hash;
 	var username = "";
@@ -29,6 +35,7 @@ var getusername = function(){
 		return username;
 	}
 	setUsername(username);
+	login_graf(username);
 	return username;
 };
 
